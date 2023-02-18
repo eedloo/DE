@@ -1,0 +1,1 @@
+The main purpose of this first project is to work on understanding underlying data structures, relationships between hierarchical data in JSON format, and being able to transform that into a flat (denormalized) format that a data anlyst or data scientist could use more easily.  This kind of denormalization also helps create files for analytical databases like a data warehouse.
