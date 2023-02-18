@@ -90,6 +90,7 @@ def refine(df):
 def result(df, name_of_file):
     return df.to_csv(name_of_file)
 
+# Parse the "json" file and output a "csv" file
 def parse(filename, output_file):
     data = file_open(filename)
     npis = pgid(data)
