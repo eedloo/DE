@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Lizzi",
+        "type": "dog",
+        "breed": "pug"
+    },
+    {
+        "name": "Paloma",
+        "type": "dog",
+        "breed": "bernedoodle"
+    }
+]

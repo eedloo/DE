@@ -1,0 +1,242 @@
+{
+    "reporting_entity_name": "BlueCross BlueShield of Tennessee",
+    "reporting_entity_type": "Health Insurance Issuer",
+    "last_updated_on": "2022-04-22",
+    "provider_references": [
+        {
+            "provider_group_id": 330.0000095818,
+            "provider_groups": [
+                {
+                    "npi": [
+                        1821383431
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1821383431"
+                    }
+                },
+                {
+                    "npi": [
+                        1912209115
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1912209115"
+                    }
+                },
+                {
+                    "npi": [
+                        1487943080
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1487943080"
+                    }
+                },
+                {
+                    "npi": [
+                        1669897583
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1669897583"
+                    }
+                },
+                {
+                    "npi": [
+                        1114244936
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1114244936"
+                    }
+                },
+                {
+                    "npi": [
+                        1043471667
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1043471667"
+                    }
+                }
+            ]
+        },
+        {
+            "provider_group_id": 330.000011452,
+            "provider_groups": [
+                {
+                    "npi": [
+                        1134561095
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1134561095"
+                    }
+                },
+                {
+                    "npi": [
+                        1891768701
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1891768701"
+                    }
+                },
+                {
+                    "npi": [
+                        1023259041
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1023259041"
+                    }
+                },
+                {
+                    "npi": [
+                        1194234690
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1194234690"
+                    }
+                },
+                {
+                    "npi": [
+                        1023314168
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1023314168"
+                    }
+                },
+                {
+                    "npi": [
+                        1245363225
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1245363225"
+                    }
+                },
+                {
+                    "npi": [
+                        1033472451
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1033472451"
+                    }
+                },
+                {
+                    "npi": [
+                        1023626272
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1023626272"
+                    }
+                },
+                {
+                    "npi": [
+                        1396949426
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1396949426"
+                    }
+                },
+                {
+                    "npi": [
+                        1912313081
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1912313081"
+                    }
+                },
+                {
+                    "npi": [
+                        1477184075
+                    ],
+                    "tin": {
+                        "type": "npi",
+                        "value": "1477184075"
+                    }
+                }
+            ]
+        }
+    ],
+    "in_network": [
+        {
+            "negotiation_arrangement": "ffs",
+            "name": "HOME HEALTH RESPIRATORY THERAPY, INITIAL EVALUATION",
+            "billing_code_type": "HCPCS",
+            "billing_code_type_version": "2022",
+            "billing_code": "S5180",
+            "negotiated_rates": [
+                {
+                    "provider_references": [
+                        330.0000095818
+                    ],
+                    "negotiated_prices": [
+                        {
+                            "negotiated_type": "fee schedule",
+                            "negotiated_rate": 11.64,
+                            "expiration_date": "9999-12-31",
+                            "service_code": [
+                                "12"
+                            ],
+                            "billing_class": "professional"
+                        }
+                    ]
+                },
+                {
+                    "provider_references": [
+                        330.000011452
+                    ],
+                    "negotiated_prices": [
+                        {
+                            "negotiated_type": "fee schedule",
+                            "negotiated_rate": 9.5,
+                            "expiration_date": "9999-12-31",
+                            "service_code": [
+                                "12"
+                            ],
+                            "billing_class": "professional"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "negotiation_arrangement": "ffs",
+            "name": "KNEE ANKLE FOOT ORTHOSIS FULL PLASTIC STATIC PREFABRICATED  (PEDIATRIC SIZE)INCLUDES FITTING AND ADJUSTMENT",
+            "billing_code_type": "HCPCS",
+            "billing_code_type_version": "2022",
+            "billing_code": "L2035",
+            "negotiated_rates": [
+                {
+                    "provider_references": [
+                        330.0000095818
+                    ],
+                    "negotiated_prices": [
+                        {
+                            "negotiated_type": "fee schedule",
+                            "negotiated_rate": 64.91,
+                            "expiration_date": "9999-12-31",
+                            "service_code": [
+                                "12",
+                                "11"
+                            ],
+                            "billing_class": "professional",
+                            "billing_code_modifier": [
+                                "UE"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
