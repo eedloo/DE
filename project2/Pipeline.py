@@ -9,8 +9,6 @@ valid = pd.read_csv('./data/car_price_prediction_output.valid')
 valid = valid.sort_values('ID').reset_index(drop=True)
 cs_df = pd.read_excel('./data/car_stocks.xlsx')
 
-mfrs = list(cs_df.Manufacturer.unique())
-years = list(range(2011, 2016))
 
 # Extracts starting and ending prices of each year, and calculate percent changes for each manufacturer
 # Returns a dictionary with company's name as keys and extracted values of each year as values
