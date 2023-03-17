@@ -2,9 +2,12 @@ import pandas as pd
 import numpy as np
 pd.set_option('display.precision', 10)
 
-valid = pd.read_csv(r"D:\SLU\AI MSc\Repos\DE\project2\data\car_price_prediction_output.valid")
+__author__ = "Mohsen Eedloo"
+__email__ = "Mohsen.eedloo@gmail.com"
+
+valid = pd.read_csv('./data/car_price_prediction_output.valid')
 valid = valid.sort_values('ID').reset_index(drop=True)
-cs_df = pd.read_excel(r'D:\SLU\AI MSc\Repos\DE\project2\data\car_stocks.xlsx')
+cs_df = pd.read_excel('./data/car_stocks.xlsx')
 
 mfrs = list(cs_df.Manufacturer.unique())
 years = list(range(2011, 2016))
@@ -12,6 +15,7 @@ years = list(range(2011, 2016))
 # Extracts starting and ending prices of each year, and calculate percent changes for each manufacturer
 # Returns a dictionary with company's name as keys and extracted values of each year as values
 def extract(dataframe):
+    mfrs = list(cs_df.Manufacturer.unique())
     dic={}
     for j in range(len(mfrs)):
         sub_df = dataframe[dataframe['Manufacturer'] == mfrs[j]].sort_values('Date').reset_index(drop=True)
@@ -30,6 +34,8 @@ def extract(dataframe):
 # The extract function's output dictionary is the input here
 # Returns a dictionary with years of keys and median percent changes for that year as values
 def mchange(data):
+    years = list(range(2011, 2016))
+    mfrs = list(cs_df.Manufacturer.unique())
     pchfy = {}
     for i in years:
         pch = []
@@ -42,6 +48,8 @@ def mchange(data):
 # Returns nested list of required values
 # Makes the data ready to build the stocks dataframe
 def agg(dic, pchfy):
+    years = list(range(2011, 2016))
+    mfrs = list(cs_df.Manufacturer.unique())
     data = []
     for i in mfrs:
         for j in years:
@@ -74,7 +82,7 @@ def make_df(data):
     return stock_df
 
 # Builds a dataframe of colors based on the URL 
-def color_df():
+def color():
     data = pd.read_html("https://en.wikipedia.org/wiki/Car_colour_popularity")
     color_df = data[0]
     colnames = ['Color', 'NA PPG', 'NA DP', 'EU PPG', 'EU DP', 'AP PPG', 'AP DP', 'WORLD PPG', 'WORLD DP']
@@ -90,12 +98,8 @@ def color_df():
 # "Car Price Prediction"
 # Loads and filters data
 def cpp():
-    colnames = ['ID', 'Price', 'Levy', 'Manufacturer', 'Model', 'Prod. year', 'Category', 'Leather interior',
-                'Fuel type', 'Engine volume', 'Mileage', 'Cylinders', 'Gear box type', 'Drive wheels',
-                'Doors', 'Wheel', 'Color', 'Airbags', 'Starting Stock', 'Ending Stock', 'Stock Price Change',
-                'Percentile', 'NA PPG', 'NA DP', 'EU PPG', 'EU DP', 'AP PPG', 'AP DP', 'WORLD PPG', 'WORLD DP', 'CCI']
-    cpp = pd.read_csv(r"D:\SLU\AI MSc\Repos\DE\project2\data\car_price_prediction.csv")
-    #mfrs = ['Hyundai', 'Toyota', 'Ford', 'Chevrolet']
+    cpp = pd.read_csv('./data/car_price_prediction.csv')
+    mfrs = ['Hyundai', 'Toyota', 'Ford', 'Chevrolet']
     MFRS = list(map(lambda x: x.upper(), mfrs))
     years = list(range(2011, 2016))
     cpp_df = cpp[(cpp['Manufacturer'].isin(MFRS)) & (cpp['Prod. year'].isin(years))]
@@ -105,7 +109,7 @@ def cpp():
 # It filters and calculate the values of CCI
 # Returns a dataframe
 def cci():
-    cci = pd.read_csv(r"D:\SLU\AI MSc\Repos\DE\project2\data\CCI.csv")
+    cci = pd.read_csv('./data/CCI.csv')
     cci_years = ['2011-01', '2012-01', '2013-01', '2014-01', '2015-01']
     cci_filtered = cci[(cci['LOCATION'] == 'OECD') & cci.TIME.isin(cci_years)][['TIME', 'Value']].reset_index(drop=True)
     cci_filtered.rename(columns={'TIME': 'Prod. year', 'Value': 'CCI'}, inplace=True)
@@ -122,14 +126,3 @@ def merge(cpp_df, stock_df, color_df, cci_df):
     merge3 = merge2.merge(cci_df, how='outer', on='Prod. year')
     merge3 = merge3.sort_values('ID').reset_index(drop=True)
     return merge3
-
-# Runs the pipeline
-def run():
-    dic = extract(cs_df)
-    pchfy = mchange(dic)
-    data = agg(dic, pchfy)
-    stock_df = make_df(data)
-    color_df = color_df()
-    cpp_df = cpp()
-    cci_df = cci()
-    return merge(cpp_df, stock_df, color_df, cci_df)
