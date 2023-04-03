@@ -4,14 +4,16 @@ import json
 import os
 import glob
 
-# Opens files in Data folder
-# Returns a dataframe per files
-def open_asdf():
-    for file in glob.glob('./Data/*'):
-        if file[-5:] == '.json':
-            data = [json.loads(line) for line in open(file, 'r')]
-            politifact = pd.DataFrame(data)
-        if file[-4:] == '.csv':
-            data = pd.read_csv(file)
-            tweets = pd.DataFrame(data)
-    return politifact, tweets
+# Opens csv files in Data folder and concatenate them
+# Filter on English tweets and select the necessary feature (content)
+# Returns a dataframe
+def open_tweets():
+    df = pd.concat([pd.read_csv(file) for file in glob.glob('./Data/*.csv')])
+    return df[df['language'] == 'English'][['content']]
+
+# Opens json file in Data folder
+# Returns a dataframe
+def open_politifact():
+    for file in glob.glob('./Data/*.json'):
+        data = [json.loads(line) for line in open(file, 'r')]
+        return pd.DataFrame(data)
