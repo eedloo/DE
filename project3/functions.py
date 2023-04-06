@@ -61,7 +61,7 @@ def freq_words(tweets, common_words = 50, use_dumped = True):
     tags: a list of words with corresponding part of speech tag.
 
     Input:
-                Tweets datafram.
+                Tweets dataframe.
                 The number of desired common words. Default value has been set to 50.
                 A flag for control of using dumped files. Default value has been set to True.
 
