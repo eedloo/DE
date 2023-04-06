@@ -27,13 +27,14 @@ def open_politifact():
     The function opens the only Politifact json file in the Data folder.
     Records in the file are seperated, therefore, we open them as a list of dictionaries.
     all dictionaries have same length and keys.
-    The function later output a dataframe built from the list of dictionaries.
+    The function later output a filtered dataframe built from the list of dictionaries.
+    The only columns that are interested here are "verdict" and "statement".
 
     Input: 
             None
     
     Output:
-            A dataframe built upon the json file
+            A filtered dataframe built upon the json file.
 
     * Example
     >>> data[1]
@@ -48,9 +49,10 @@ def open_politifact():
 
     '''
     data = [json.loads(line) for line in open('./Data/politifact_factcheck_data.json', 'r')]
-    return pd.DataFrame(data)
+    df = pd.DataFrame(data)
+    return df[['verdict', 'statement']]
 
-def freq_words(tweets, common_words = 50, use_dumped = True):
+def freq_words(tweets, common_words = 20, use_dumped = True):
     '''
     The function analyzes the tweets and finds the most common words in that.
     It uses nltk package to lemmatize, find part of speech tags, and number of repeat in the data.
@@ -62,7 +64,7 @@ def freq_words(tweets, common_words = 50, use_dumped = True):
 
     Input:
                 Tweets dataframe.
-                The number of desired common words. Default value has been set to 50.
+                The number of desired common words. Default value has been set to 20.
                 A flag for control of using dumped files. Default value has been set to True.
 
     Output:     
@@ -112,3 +114,27 @@ def freq_words(tweets, common_words = 50, use_dumped = True):
     noun_words = [t[0] for t in tags if t[1] in ('NN','NE') and len(t[0]) > 2]
     distribution = FreqDist(noun_words)
     return distribution.most_common(common_words)
+
+def word_selection(common_words, custom_words = True):
+    '''
+    The function creates a list of words from the common words.
+    A pre-defined list has been provided based on the most interesting words among the top 50s.
+    A flag is provided if the user wants to use the top 20 actual words.
+
+    Input:
+            List of common words with their repeat number as a form of tuples.
+    
+    Output:
+            A list of the top 20 most interesting (or actual words).    
+    '''
+
+    if custom_words:
+        # The words in this list has been chosen from the top 50 common words as they seemed to be more interesting and relevant.
+        words = ['news', 'world', 'health', 'business', 'realDonaldTrump', 
+        'death', 'attack', 'work', 'crime', 'country', 
+        'vote', 'state', 'officer', 'money', 'fire', 
+        'law', 'police', 'president', 'crash', 'election']
+    else:
+        words = [word for i, (word, repeat) in enumerate(common_words)]
+    return words
+
