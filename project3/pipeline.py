@@ -30,7 +30,7 @@ def find_freq_words(tweets_data: DataFrame) -> list:
 @asset(group_name='Intermediate')
 def make_words_list(find_freq_words: list) -> list:
     ''' Creates a list of most frequent words. (pre-defined or actual) '''
-    list_of_words = functions.word_selection(find_freq_words)
+    list_of_words = functions.word_selection(find_freq_words, custom_words = True)
     return list_of_words
 
 @asset(group_name='Final')
