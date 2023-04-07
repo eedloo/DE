@@ -18,7 +18,7 @@ def open_tweets():
     Output:
             A cleaned filtered dataframe
     '''
-    df = pd.concat([pd.read_csv(file) for file in glob.glob('./Data/*.csv')])
+    df = pd.concat([pd.read_csv(file, low_memory=False) for file in glob.glob('./Data/*.csv')])
     return df[df['language'] == 'English'][['content']].dropna().reset_index(drop=True)
 
 
@@ -98,6 +98,11 @@ def freq_words(tweets, common_words = 20, use_dumped = True):
      ('school', 14084),
      ('home', 14015)]
     '''
+    import nltk
+    from nltk import word_tokenize, FreqDist
+    from nltk.stem import WordNetLemmatizer
+    from nltk.corpus import stopwords
+    
     lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words("english"))
     # creating a very long string of all words
