@@ -9,6 +9,9 @@ import re
 import pickle
 import functions
 
+__author__ = "Mohsen Eedloo"
+__email__ = "Mohsen.eedloo@gmail.com"
+
 @asset(group_name='Input_Data')
 def tweets_data() -> DataFrame:
     ''' Aggregates and opens tweets csv files, and returns a dataframe '''

@@ -1,10 +1,3 @@
-import numpy as np
-import pandas as pd
-import json
-import glob
-import re
-import pickle
-
 def open_tweets():
     '''
     The function opens all of the Tweets csv files in the Data folder. 
