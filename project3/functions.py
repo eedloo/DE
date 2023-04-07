@@ -50,7 +50,12 @@ def open_politifact():
     '''
     data = [json.loads(line) for line in open('./Data/politifact_factcheck_data.json', 'r')]
     df = pd.DataFrame(data)
-    return df[['verdict', 'statement']]
+    df_filtered = df[['verdict', 'statement']]
+    # Correcting verdicts name
+    df_filtered.verdict.replace(list(df_filtered.verdict.unique()), 
+    ['True', 'False', 'Mostly-True', 'Half-True', 'Pants-on-Fire', 'Mostly-False'], 
+    inplace = True)
+    return df_filtered
 
 def freq_words(tweets, common_words = 20, use_dumped = True):
     '''
@@ -119,7 +124,7 @@ def word_selection(common_words, custom_words = True):
     '''
     The function creates a list of words from the common words.
     A pre-defined list has been provided based on the most interesting words among the top 50s.
-    A flag is provided if the user wants to use the top 20 actual words.
+    A flag is provided if the user wants to use the actual top words.
 
     Input:
             List of common words with their repeat number as a form of tuples.
@@ -130,11 +135,51 @@ def word_selection(common_words, custom_words = True):
 
     if custom_words:
         # The words in this list has been chosen from the top 50 common words as they seemed to be more interesting and relevant.
-        words = ['news', 'world', 'health', 'business', 'realDonaldTrump', 
+        list_of_words = ['news', 'world', 'health', 'business', 'realDonaldTrump', 
         'death', 'attack', 'work', 'crime', 'country', 
         'vote', 'state', 'officer', 'money', 'fire', 
         'law', 'police', 'president', 'crash', 'election']
     else:
-        words = [word for i, (word, repeat) in enumerate(common_words)]
-    return words
+        list_of_words = [word for i, (word, repeat) in enumerate(common_words)]
+    return list_of_words
 
+def counter_match(politifact, list_of_words):
+    '''
+    The function counts the number of occurance of each words in "list_of_words" on the "politifact" dataframe.
+    Workflow:
+        $ A list will be created of the same length of the "politifact" dataframe with number of occurance of each word in that statement.
+            >>>num_of_repeats[2]
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+          This shows the 12th word in the list ("state") occured once in the statement index row 2. None of the other words has been found.
+            >>>politifact.loc[2, 'statement']
+            'Says\xa0Maggie Hassan was "out of state on 30 days over the last three months."'
+        $ The "politifact" dataframe will be updated with "list_of_words" as new columns and "num_of_repeats" as values.
+        $ The number of occurance of each word correcponding to every verdict then will be captured.
+            >>>occurance['news']
+            {'True': 5,
+            'Mostly-True': 4,
+            'Half-True': 5,
+            'Mostly-False': 8,
+            'False': 29,
+            'Pants-on-Fire': 11}
+          This shows the word "news" observed with this distribution in "politifact" statement column.
+        $ An empty dataframe with columns equal to "politifact" dataframe (except for "statement") will be created.
+        $ The values of each dictionary then will be added to the output dataframe.
+    '''
+    list_of_verdicts = ['True', 'Mostly-True', 'Half-True', 'Mostly-False', 'False', 'Pants-on-Fire']
+    num_of_repeats = []
+    for i in range(len(politifact)):
+        num_of_repeats.append([politifact.loc[i, 'statement'].count(word) for word in list_of_words])
+    politifact[list_of_words] = num_of_repeats
+    occurance_dic = {}
+    for word in list_of_words:
+        dic = {}
+        for verdict in list_of_verdicts:
+            dic[verdict] = politifact[politifact['verdict'] == verdict][word].sum()
+        occurance_dic[word] = dic
+    df = pd.DataFrame(columns=politifact.columns).drop('statement', axis=1)
+    df['verdict']=['True', 'Mostly-True', 'Half-True', 'Mostly-False', 'False', 'Pants-on-Fire']
+    for word in list_of_words:
+        df[word] = list(occurance_dic[word].values())
+    return df
+    
