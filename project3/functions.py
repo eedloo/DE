@@ -183,7 +183,7 @@ def counter_match(politifact, list_of_words):
             dic[verdict] = politifact[politifact['verdict'] == verdict][word].sum()
         occurance_dic[word] = dic
     df = pd.DataFrame(columns=politifact.columns).drop('statement', axis=1)
-    df['verdict']=['True', 'Mostly-True', 'Half-True', 'Mostly-False', 'False', 'Pants-on-Fire']
+    df['verdict'] = list_of_verdicts
     for word in list_of_words:
         df[word] = list(occurance_dic[word].values())
     return df
