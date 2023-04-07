@@ -160,7 +160,7 @@ def counter_match(politifact, list_of_words):
             'Says\xa0Maggie Hassan was "out of state on 30 days over the last three months."'
         $ The "politifact" dataframe will be updated with "list_of_words" as new columns and "num_of_repeats" as values.
         $ The number of occurance of each word correcponding to every verdict then will be captured.
-            >>>occurance['news']
+            >>>occurance_dic['news']
             {'True': 5,
             'Mostly-True': 4,
             'Half-True': 5,
