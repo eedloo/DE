@@ -8,7 +8,7 @@ import requests
 
 def ubereat_restaurants():
     '''
-    The function loads, clean, and outputs a dataframe from the file "Ubereats_restaurants.csv"
+    The function loads, clean, and outputs a dataframe from the file "restaurants.csv"
     * Cleaning:
         ! dropping unnecessary columns
         ! removing records without address or price range
@@ -49,7 +49,7 @@ def ubereat_restaurants():
 
 def ubereat_menus():
     '''
-    The function loads, cleans, and aggregates "ubereats_restaurant_menus.csv".
+    The function loads, cleans, and aggregates "restaurant-menus.csv".
 
     * Cleaning:
         ! Dropping unnecessary columns
@@ -77,7 +77,7 @@ def ubereat_menus():
 
 def nations_list():
     '''
-    The function reads a table from "www.ef.com" website to output Adjectivals of countries' name.
+    The function reads a webpage from "www.ef.com" to output Adjectivals of countries' name.
     * Example:
         Vietnam --> Vietnamese
         United States --> American
@@ -95,9 +95,9 @@ def nations_list():
 
 def cunsus():
     '''
-    The function loads US Census Median income per zipcode excel file, turn it to dataframe and output it after some modifications.
+    The function loads US Census Median income per zipcode excel file, turns it to dataframe and output it after some modifications.
     We are only interested in two columns:
-        * The second quantile 
+        * The second quantile (median)
         * Zipcode
     The cleaned dataframe later can be merged with other data to provide information about US zipcodes median income.
 
@@ -117,7 +117,7 @@ def cunsus():
 
 def restaurant_add_features(ub_clean, countries=nations_list()):
     '''
-    The function extracts and adds new features to "ubereat_restaurant" data.
+    The function extracts and adds new features to "restaurant" data.
     It checkes category of each restaurant to see:
         ! Does the restaurant have international cuisines?
             If the restaurant has more that one country name in its menu, it will be considered international.
@@ -132,7 +132,6 @@ def restaurant_add_features(ub_clean, countries=nations_list()):
     * Output:
         ! Dataframe
     '''
-    # ubereat_res = ub_clean
     from sklearn.preprocessing import MinMaxScaler
     normalizer = MinMaxScaler()
     for i in ub_clean[ub_clean.category.notna()].index:
@@ -156,7 +155,7 @@ def restaurant_add_features(ub_clean, countries=nations_list()):
 
 def menus_add_features(ubereat_men_agg):
     '''
-    The function engineers a new feature and adds it to the "ubereat menu" data.
+    The function engineers a new feature and adds it to the ubereat menu data.
     The number of selections in each restaurant's menu will be captured, and mapped to 4 level of variaty.
     For levels, quantile of data has been used.
 
