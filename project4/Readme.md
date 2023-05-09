@@ -7,7 +7,7 @@ The data we use for this project are as below:
 
 ## UberEat dataset  
 
-This dataset is hosted on [Kaggle](https://www.kaggle.com/datasets/ahmedshahriarsakib/uber-eats-usa-restaurants-menus) and is free to use. The dataset is consisted of two *CSV* files: restaurants, and restaurant-menus.  
+This dataset is hosted on [Kaggle](https://www.kaggle.com/datasets/ahmedshahriarsakib/uber-eats-usa-restaurants-menus) is the base for this project, and is free to use. The dataset is consisted of two *CSV* files: restaurants, and restaurant-menus. Full description of the dataset is provided on the webpage.  
 In order to use the data properly, it is recommended to extract it in the **Data** folder, and let the names be intact. 
 
 ## US Census dataset  
