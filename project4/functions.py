@@ -143,9 +143,9 @@ def restaurant_add_features(ub_clean, countries=nations_list()):
         else:
             ub_clean.at[i, 'international'] = 0
         if 'Vegetarian' in categories_str:
-            ub_clean.at[i, 'Vegetarian'] = 1
+            ub_clean.at[i, 'vegetarian'] = 1
         else:
-            ub_clean.at[i, 'Vegetarian'] = 0
+            ub_clean.at[i, 'vegetarian'] = 0
         if 'Alcohol' in categories_str:
             ub_clean.at[i, 'bar'] = 1
         else:
