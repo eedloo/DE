@@ -65,7 +65,7 @@ def ubereat_menus():
     * Output:
         Dataframe
     '''
-    ubereat_men = pd.read_csv('./Data/restaurant_menus.csv')
+    ubereat_men = pd.read_csv('./Data/restaurant-menus.csv')
     ubereat_men.drop(['name', 'description'], axis=1, inplace=True)
     ubereat_men.price.replace(to_replace='\s\w{3}', regex = True, value='', inplace=True)
     ubereat_men.price = pd.to_numeric(ubereat_men.price, downcast='float')
