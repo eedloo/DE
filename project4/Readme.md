@@ -22,9 +22,3 @@ This dataset is available on the [United States Census Bureau](https://data.cens
 
 On the *UberEat* restaurant dataset, some general information is provided about the restaurant on the *Category* column. One interesting thing is whether the restaurant offers international cuisines. In this dataset, the food originality information is provided by the country name adjectival form, like American or Canadian.  
 Therefore, we need a small dataset of adjectival form of countries' names. We used the information from [Education First](https://www.ef.com/wwen/english-resources/english-grammar/nationalities/). On this page, there are some tables providing the information we need to add to our dataset.  
-
-## Summary  
-
-In this project we use above mentioned dataset and data sources to provide more detail and relevant information for *UberEat* dataset. Some new features have been engineered and added to data like:  
-
-Address information
